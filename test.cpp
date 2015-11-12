@@ -25,13 +25,23 @@ void test_Attribute_setPoints();
 void test_Attribute_read(); 
 
 
-//Test functions for Answer.cpp:
+//Test functions for Answer.cpp: TO DO
 void test_Answer_construct_default();
 void test_Answer_construct_2param();
-void test_Answer_setAttribute();
 void test_Answer_setText();
-void test_Answer_read();
-void test_Answer_write();
+void test_Answer_setAttribute();
+
+//Test functions for Personality.cpp: TO DO
+void test_Personality_adjustPersonality();
+void test_Personality_reset();
+
+
+//Test functions for Question.cpp: TO DO
+void test_Question_addAnswer();
+void test_Question_getNumAnswers();
+void test_Question_getValueWithinRange();
+void test_Question_setQuestionPrompt();
+void test_Question_read();
 
 
 
@@ -43,11 +53,9 @@ void test_Answer_write();
  */
 
 int main() {
-    test_Attribute_construct_default();
-    test_Attribute_construct_2param();
-    test_Attribute_setIndex();
-    test_Attribute_setPoints();
-    test_Attribute_read();
+    
+    test_Question_read();
+
 
     // Add calls to test functions that you create here
 
@@ -168,13 +176,77 @@ void test_Answer_construct_default() {
     ans.getAttribute().getIndex();
 
 
-    if (ans.getAttribute() !=  attribute) {
+    if (ans.getAttribute().getIndex() !=  0) {
         cout << "bug in Answer default constructor" << endl;
     }
 
-    if (ans.getText() != " ") {
+    if (ans.getAttribute().getPoints() != 0) {
         cout << "bug in Answer default constructor" << endl;
     }
+
+    if (ans.getText() != "") {
+        cout << "bug in Answer default constructor" << endl;
+    }
+}
+
+/*void test_Answer_setAttribute() {
+ 
+ /////TO DO///////
+
+    Answer ans;
+   
+
+    ans.setAttribute();
+    if (ans.setAttribute(ins, 0) != 0 ) {
+        cout << "bug in Answer::setAttribute()" << endl;
+    }
+
+ 
+    ans.setAttribute();
+    if (ans.setAttribute() != ) {
+        cout << "bug in Answer::setAttribute()" << endl;
+    }
+
+ 
+    ans.setAttribute();
+    if (ans.setAttribute() != ) {
+        cout << "bug in Answer::setAttribute()" << endl;
+    }
+
+}*/
+
+void test_Personality_adjustPersonality() {
+// TO DO 
+}
+
+void test_Personality_reset() {
+    // TO DO 
+}
+
+void test_Question_addAnswer() {
+    // TO DO
+}
+
+
+void test_Question_getNumAnswers() {
+    // TO DO
+}
+
+
+void test_Question_getValueWithinRange() {
+    // TO DO
+}
+
+void test_Question_setQuestionPrompt() {
+    // TO DO
+}
+
+void test_Question_read() {
+    Question que;
+    cout << "2What is your favorite color? "<< endl;
+    que.read(cin);
+    que.write(cout);
+
 }
 
 
