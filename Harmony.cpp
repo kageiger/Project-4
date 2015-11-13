@@ -11,15 +11,16 @@
 
 #include "harmony.h"
 
+
 int main() {
     printOpeningMessage();
 
-    // TODO: declare a variable of datatype Personality
+    //declare a variable of datatype Personality
     Personality k;
 
     string allnames[MAX_QUIZZES];
     int numQuizzes = 0;
-    // TODO: declare variables to keep track of:
+    //     declare variables to keep track of:
     //     all the filenames of the quizzes that have been taken
     //     and the number of quizzes that have been taken
 
@@ -30,12 +31,9 @@ int main() {
 
         printMenu();
 
-        int userInput = 5;
-        cin >> userInput;
-
-        while (userInput < 1 || userInput > 5) {
-            getNumberInRange(1, 5);
-        }
+       int userInput = 5;
+       getNumberInRange(1, 5);
+        
 
         // TODO: read which menu choice the user wants from the keyboard
         //       make sure it's within range
@@ -55,15 +53,17 @@ int main() {
             }
             if (numQuizzes != MAX_QUIZZES) {
                 ifstream theFile;
-                openFile(theFile);
-                string fileName;
+                string fileName = openFile(theFile);
+                
 
-                if (quizHasBeenTaken(fileName, allnames, numQuizzes) == true) {
+                if (quizHasBeenTaken(fileName, allnames, numQuizzes)) {
                     cout << "You've already taken that quiz!" << endl;
+                } else{
+                    allnames[numQuizzes] = fileName;
+                    takeQuiz(theFile, k);
+                    numQuizzes++;
                 }
-                allnames[numQuizzes] = fileName;
-                takeQuiz(theFile, k);
-                numQuizzes++;
+               
             }
 
             // TODO: else, create an input stream instance, ask user for
@@ -111,15 +111,16 @@ int main() {
 * You must implement the following functions.
 */
 
+
 int getNumberInRange(int min, int max) {
     // TODO: Read choice from user
-
-    int userChoice;
-
+    int userChoice = 0;
+    cin >> userChoice;
     // TODO: if user does not cooperate, read everything remaining on the line
     //       into a temp variable and keep asking
-    while (userChoice < min || userChoice > max) {
+    while (cin.fail() || userChoice < min || userChoice > max ) {
         if (cin.fail()) {
+
             cin.clear();
             string str;
             getline(cin, str);
@@ -139,7 +140,6 @@ bool quizHasBeenTaken(string fileName, string takenQuizFileNames[MAX_QUIZZES],
     // TODO: see if fileName is in the takenQuizFileNames array
     for (int i = 0; i < MAX_QUIZZES; i++) {
         if (takenQuizFileNames[i] == fileName) {
-            ++numberOfQuizzesTaken;
             return true;
         }
     }
@@ -180,10 +180,11 @@ void takeQuiz(ifstream &quizFile, Personality &personality) {
         cout << endl << "Question ";
         cout << i + 1; // TODO: Put the question number here
         cout << " out of ";
-        cout << numQuestions; // TODO: Put your variable name here that tracks
+        cout << numQuestions << endl; // TODO: Put your variable name here that tracks
                               //       the number of questions
-        cout << endl;
+        cout << endl << endl;
         getIt.write(cout);
+        cout << endl;
         // TODO: Print the question to cout
 
         cout << endl << "Enter your answer: ";
@@ -191,8 +192,8 @@ void takeQuiz(ifstream &quizFile, Personality &personality) {
         cin >> userPick;
         Attribute theAttribute = getIt.getAttributeOfAnswer(userPick);
 
-        Personality a;
-        a.adjustPersonality(theAttribute);
+     
+        personality.adjustPersonality(theAttribute);
 
     }
     // TODO: Read the answer from the keyboard, making sure that is within
