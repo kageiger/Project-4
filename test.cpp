@@ -15,25 +15,25 @@
 #include "Question.h"
 #include "Answer.h"
 #include "Attribute.h"
-// Test functions written for us:
+// Test functions written for us: (DONE)
 void test_Attribute_construct_default();
 void test_Attribute_construct_2param();
 void test_Attribute_setIndex();
 
-//Test functions for Attribute.cpp:
+//Test functions for Attribute.cpp: (DONE)
 void test_Attribute_setPoints();
 void test_Attribute_read(); 
 
 
-//Test functions for Answer.cpp: TO DO
-void test_Answer_construct_default();
-void test_Answer_construct_2param();
-void test_Answer_setText();
+//Test functions for Answer.cpp: (DONE)
+void test_Answer_construct_default(); 
 void test_Answer_setAttribute();
+void test_Answer_getText();
 
-//Test functions for Personality.cpp: TO DO
+//Test functions for Personality.cpp:(DONE)
+void test_Personality_reset(); 
 void test_Personality_adjustPersonality();
-void test_Personality_reset();
+
 
 
 //Test functions for Question.cpp: TO DO
@@ -41,7 +41,7 @@ void test_Question_addAnswer();
 void test_Question_getNumAnswers();
 void test_Question_getValueWithinRange();
 void test_Question_setQuestionPrompt();
-void test_Question_read();
+
 
 
 
@@ -52,15 +52,23 @@ void test_Question_read();
  * It is a good idea to test read() and write()
  */
 
-int main() {
-    
-    test_Question_read();
+/*int main() {
+     test_Attribute_construct_default();
+     test_Attribute_construct_2param();
+     test_Attribute_setIndex();
+     test_Attribute_setPoints();
+     test_Answer_construct_default();
+     test_Answer_setAttribute();
+     test_Answer_getText();
+     test_Personality_adjustPersonality();
+     test_Personality_reset();
+     test_Question_addAnswer();
 
 
     // Add calls to test functions that you create here
 
     return 0;
-}
+}*/
 
 
 void test_Attribute_construct_default() {
@@ -112,33 +120,33 @@ void test_Attribute_setIndex() {
     Attribute att(4, 5);
 
     att.setIndex(0);
-    if (att.getIndex() != 0) {
-        cout << "bug in Attribute::setIndex()" << endl;
-    }
+if (att.getIndex() != 0) {
+    cout << "bug in Attribute::setIndex()" << endl;
+}
 
-    if (att.getPoints() != 5) {
-        cout << "bug in Attribute::setIndex()" << endl;
-    }
+if (att.getPoints() != 5) {
+    cout << "bug in Attribute::setIndex()" << endl;
+}
 
-    // Test invalid index, low
-    att.setIndex(-1);
-    if (att.getIndex() != 0) {
-        cout << "bug in Attribute::setIndex()" << endl;
-    }
+// Test invalid index, low
+att.setIndex(-1);
+if (att.getIndex() != 0) {
+    cout << "bug in Attribute::setIndex()" << endl;
+}
 
-    if (att.getPoints() != 5) {
-        cout << "bug in Attribute::setIndex()" << endl;
-    }
+if (att.getPoints() != 5) {
+    cout << "bug in Attribute::setIndex()" << endl;
+}
 
-    // Test invalid index, high
-    att.setIndex(MAX_NUM_ATTRIBUTES);
-    if (att.getIndex() != (MAX_NUM_ATTRIBUTES - 1)) {
-        cout << "bug in Attribute::setIndex()" << endl;
-    }
+// Test invalid index, high
+att.setIndex(MAX_NUM_ATTRIBUTES);
+if (att.getIndex() != (MAX_NUM_ATTRIBUTES - 1)) {
+    cout << "bug in Attribute::setIndex()" << endl;
+}
 
-    if (att.getPoints() != 5) {
-        cout << "bug in Attribute::setIndex()" << endl;
-    }
+if (att.getPoints() != 5) {
+    cout << "bug in Attribute::setIndex()" << endl;
+}
 }
 
 void test_Attribute_setPoints() {
@@ -172,11 +180,11 @@ void test_Attribute_read() {
 
 void test_Answer_construct_default() {
     Answer ans;
-    
+
     ans.getAttribute().getIndex();
 
 
-    if (ans.getAttribute().getIndex() !=  0) {
+    if (ans.getAttribute().getIndex() != 0) {
         cout << "bug in Answer default constructor" << endl;
     }
 
@@ -189,43 +197,84 @@ void test_Answer_construct_default() {
     }
 }
 
-/*void test_Answer_setAttribute() {
- 
- /////TO DO///////
+void test_Answer_setAttribute() {
 
     Answer ans;
-   
+    Attribute temp;
 
-    ans.setAttribute();
-    if (ans.setAttribute(ins, 0) != 0 ) {
+    ans.setAttribute(temp);
+    if (temp.getIndex() != ans.getAttribute().getIndex()) {
         cout << "bug in Answer::setAttribute()" << endl;
     }
 
- 
-    ans.setAttribute();
-    if (ans.setAttribute() != ) {
+
+    if (temp.getPoints() != ans.getAttribute().getPoints()) {
         cout << "bug in Answer::setAttribute()" << endl;
     }
 
- 
-    ans.setAttribute();
-    if (ans.setAttribute() != ) {
-        cout << "bug in Answer::setAttribute()" << endl;
-    }
-
-}*/
-
-void test_Personality_adjustPersonality() {
-// TO DO 
 }
+
+void test_Answer_getText() {
+    Answer ans;
+    string temp = "cats";
+    ans.setText(temp);
+    if (ans.getText() != temp){
+        cout << "bug in Answer::getText()" << endl;
+    }
+}
+
 
 void test_Personality_reset() {
-    // TO DO 
+    // Test going over max points
+    Attribute att1(1, 11);
+    Personality kate;
+    kate.write(cout);
+    kate.adjustPersonality(att1);
+    kate.write(cout); 
+    kate.reset();
+    kate.write(cout);
+    cout << endl << endl;
+
 }
 
-void test_Question_addAnswer() {
-    // TO DO
+void test_Personality_adjustPersonality() {
+    
+    // Test going over max points
+    Attribute att1(1, 11);
+    Personality kate;
+    kate.write(cout);
+    kate.adjustPersonality(att1);
+    kate.write(cout);
+    cout << endl << endl;
+
+    // Test too few points
+    Attribute att2(1, -11);
+    Personality jon;
+    jon.write(cout);
+    jon.adjustPersonality(att2);
+    jon.write(cout);
+    cout << endl << endl;
+
+    // Where nothing changes
+    Attribute att3(1, 3);
+    Personality dog;
+    dog.write(cout);
+    dog.adjustPersonality(att3);
+    dog.write(cout);
+    cout << endl << endl;
 }
+
+
+
+/*void test_Question_addAnswer() {
+    Question ans;
+    Answer a;
+    Answer answers[];
+    ans.addAnswer(a);
+    if (answers[MAX_NUMBER_OF_ANSWERS] != a) {
+        cout << "bug in Question::addAnswer" << endl;
+    }
+}*/
 
 
 void test_Question_getNumAnswers() {
@@ -241,13 +290,7 @@ void test_Question_setQuestionPrompt() {
     // TO DO
 }
 
-void test_Question_read() {
-    Question que;
-    cout << "2What is your favorite color? "<< endl;
-    que.read(cin);
-    que.write(cout);
 
-}
 
 
 
