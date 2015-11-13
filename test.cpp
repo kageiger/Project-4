@@ -52,7 +52,7 @@ void test_Question_setQuestionPrompt();
  * It is a good idea to test read() and write()
  */
 
-/*int main() {
+int main() {
      test_Attribute_construct_default();
      test_Attribute_construct_2param();
      test_Attribute_setIndex();
@@ -63,12 +63,14 @@ void test_Question_setQuestionPrompt();
      test_Personality_adjustPersonality();
      test_Personality_reset();
      test_Question_addAnswer();
+     test_Question_getNumAnswers();
+     test_Question_setQuestionPrompt();
 
 
     // Add calls to test functions that you create here
 
     return 0;
-}*/
+}
 
 
 void test_Attribute_construct_default() {
@@ -266,28 +268,61 @@ void test_Personality_adjustPersonality() {
 
 
 
-/*void test_Question_addAnswer() {
+void test_Question_addAnswer() {
+ 
     Question ans;
     Answer a;
-    Answer answers[];
+    string temp = "cat";
+    a.setText(temp);
+    int place = ans.getNumAnswers();
     ans.addAnswer(a);
-    if (answers[MAX_NUMBER_OF_ANSWERS] != a) {
-        cout << "bug in Question::addAnswer" << endl;
-    }
-}*/
+
+    Answer j = ans.getAnswer(place);
+    j.write(cout);
+    
+}
 
 
 void test_Question_getNumAnswers() {
-    // TO DO
+    Question que;
+    Answer a;
+    if (que.getNumAnswers() != 0) {
+        cout << "bug in Question::getNumAnswers" << endl;
+    }
+    que.addAnswer(a);
+    if (que.getNumAnswers() != 1) {
+        cout << "bug in Question::getNumAnswers" << endl;
+    }
+    Answer b;
+    que.addAnswer(b);
+    if (que.getNumAnswers() != 2) {
+        cout << "bug in Question::getNumAnswers" << endl;
+    }
 }
 
 
 void test_Question_getValueWithinRange() {
-    // TO DO
+   
+    /*// Test going over max value
+    Answer ans1;
+    Question que;
+    que.write(cout);
+    que.getValueWithinRange();
+    que.write(cout);
+    cout << endl << endl;
+    */
 }
 
 void test_Question_setQuestionPrompt() {
-    // TO DO
+
+    Question que;
+    string temp = "cat";
+
+    que.setQuestionPrompt(temp);
+    if (que.getQuestionPrompt() != temp) {
+        cout << "bug in Answer::setQuestionPrompt()" << endl;
+    }
+
 }
 
 
